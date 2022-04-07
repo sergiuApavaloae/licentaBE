@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { User } from './user/user.entity';
+import { UsersModule } from './user/users.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,7 +19,8 @@ import { User } from './user/user.entity';
     ssl: {
       rejectUnauthorized: false,
     }
-  })],
+  }),
+  UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
