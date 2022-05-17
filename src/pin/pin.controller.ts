@@ -1,15 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards,Request} from '@nestjs/common';
 import { PinService } from './pin.service';
 import { Pin } from './entities/pin.entity';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.auth-guard';
 
 @Controller('pin')
 export class PinController {
   constructor(private readonly pinService: PinService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createPinDto: Pin) {
-    console.log('HERE')
-    console.log(createPinDto)
+  create(@Body() createPinDto,@Request() req) {
+    console.log(req.user)
     return this.pinService.create(createPinDto);
   }
 
@@ -18,6 +19,10 @@ export class PinController {
     return this.pinService.findAll();
   }
 
+  @Get(':id/username')
+  findUser(@Param('id') id: string){
+    return this.pinService.getUserName(id)
+  }
   // @Get(':id')
   // findOne(@Param('id') id: string) {
   //   return this.pinService.findOne(+id);

@@ -7,6 +7,7 @@ import { UsersModule } from './user/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PinModule } from './pin/pin.module';
 import { Pin } from './pin/entities/pin.entity';
+import { FeedbackModule } from './feedback/feedback.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -25,7 +26,8 @@ import { Pin } from './pin/entities/pin.entity';
   }),
   UsersModule,
   AuthModule,
-  PinModule],
+  PinModule,
+  FeedbackModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -12,7 +12,6 @@ export class AuthService {
   async validateUser(email: string, pass: string): Promise<any> {
     console.log(email,'Verific user')
     const user = await this.userService.findOne(email);
-    //const hash = await bcrypt.hash(pass, 10);
     if(!user){
         return null
     }
@@ -27,9 +26,11 @@ export class AuthService {
   }
 
   async login(user: any) {
+    console.log('LOGIN')
     const payload = { email: user.email, sub: user.user_id };
     return {
       access_token: this.jwtService.sign(payload),
+      userId:user.id
     };
   }
 }

@@ -1,8 +1,9 @@
 import { Optional } from "@nestjs/common";
 import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { ForeignKeyMetadata } from "typeorm/metadata/ForeignKeyMetadata";
 
 @Entity()
-export class Pin extends BaseEntity {
+export class Feedback extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: string;
 
@@ -12,25 +13,14 @@ export class Pin extends BaseEntity {
 
     @Column({nullable:true})
     @Optional()
-    name: string;
+    pinId: string;
 
     @Column({nullable:true})
     @Optional()
-    type: string;
-
-    @Column({nullable:true})
-    latitude: string;
-
-    @Column({nullable:true})
-    longitude: string;
+    text: string;
 
     @Column({nullable:true})
     @Optional()
-    description: string;
-
-    @Column({nullable:true})
-    @Optional()
-    image3d: string;
-
+    rating: number;
 
 }
