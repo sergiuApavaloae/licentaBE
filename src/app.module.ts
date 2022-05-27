@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { PinModule } from './pin/pin.module';
 import { Pin } from './pin/entities/pin.entity';
 import { FeedbackModule } from './feedback/feedback.module';
+import { Feedback } from './feedback/entities/feedback.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,7 +19,7 @@ import { FeedbackModule } from './feedback/feedback.module';
     password: 'f64dd3fc137283ea752581087716307f3fa6c07c77b7096e43ccc2967c3c0878',
     database: 'd806ar2dqrmpbu',
     schema: 'public',
-    entities: [User,Pin],
+    entities: [User,Pin,Feedback],
     synchronize: true,
     ssl: {
       rejectUnauthorized: false,
