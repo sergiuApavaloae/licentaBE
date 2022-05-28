@@ -14,4 +14,7 @@ export class User extends BaseEntity {
     @Column({nullable:true})
     password: string;
 
+    @Column({nullable:true})
+    scor: number;
+
 }
