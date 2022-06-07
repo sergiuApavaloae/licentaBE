@@ -18,10 +18,18 @@ import { UserService } from './user.service';
   export class UserController {
     constructor(private readonly userService: UserService) {}
   
+    @Get('infos')
+    async getInfos() {
+       console.log('BEEEEE@@@')
+       const infos=await this.userService.getInfos();
+       return infos
+    }
+
     @Get(':email')
     async getOne(@Param('email') email: string) {
       return await this.userService.findOne(email);
     }
+
   
     @Get()
     async getAll() {

@@ -3,6 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import * as bcrypt from 'bcrypt';
+import { Pin } from 'src/pin/entities/pin.entity';
+import { PinRepository } from 'src/pin/pin.repository';
+import { Feedback } from 'src/feedback/entities/feedback.entity';
+import { FeedbackRepository } from 'src/feedback/feedback.repository';
 
 
 @Injectable()
@@ -10,6 +14,10 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private usersRepository: UserRepository,
+    @InjectRepository(Pin)
+    private pinRepository: PinRepository,
+    @InjectRepository(Feedback)
+    private feedbackRepository: FeedbackRepository
   ) {}
 
   findAll(): Promise<User[]> {
@@ -22,6 +30,26 @@ export class UserService {
 
   async remove(id: string): Promise<void> {
     await this.usersRepository.delete(id);
+  }
+
+  async getInfos():Promise<any>{
+    let infos=[]
+    console.log("BEEEE")
+    const users=await this.usersRepository.find()
+    for(const user of users){
+      let userInfo={name:"",scor:0,numberReports:0,numberFeedbacks:0}
+      userInfo.name=user.name
+      userInfo.scor=user.scor
+      const pins=await this.pinRepository.find({where:{userId:user.id}})
+      userInfo.numberReports=pins.length
+
+      const feedbacks=await this.feedbackRepository.find({where:{userId:user.id}})
+      userInfo.numberFeedbacks=feedbacks.length
+
+      infos.push(userInfo)
+
+    }
+    return infos
   }
 
   async addUser(user: User) {
