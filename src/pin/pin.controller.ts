@@ -25,7 +25,7 @@ export class PinController {
   }
 
   @Get(':pinId')
-  getPin(@Param('id') id: string) {
+  getPin(@Param('pinId') id: string) {
     return this.pinService.getPin(id);
   }
 

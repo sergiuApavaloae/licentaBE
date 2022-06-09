@@ -90,7 +90,7 @@ export class PinService {
     return infos
   }
   async getPin(id){
-  const pin=await this.pinRepository.find({where:{id:id}})
+  const pin=await this.pinRepository.findOne({where:{id:id}})
   return pin
   }
 }
