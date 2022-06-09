@@ -87,6 +87,10 @@ export class PinService {
       infos.push(info)
     }
 
+    infos.sort((a,b)=>{
+      return a.rating-b.rating
+     })
+     infos=infos.slice(0,10)
     return infos
   }
   async getPin(id){

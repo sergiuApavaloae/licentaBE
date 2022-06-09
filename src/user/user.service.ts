@@ -49,6 +49,10 @@ export class UserService {
       infos.push(userInfo)
 
     }
+    infos.sort((a,b)=>{
+      return a.rating-b.rating
+     })
+     infos=infos.slice(0,10)
     return infos
   }
 

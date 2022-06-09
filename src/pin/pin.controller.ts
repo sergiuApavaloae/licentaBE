@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards,Request} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards,Request, Sse} from '@nestjs/common';
 import { PinService } from './pin.service';
 import { Pin } from './entities/pin.entity';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.auth-guard';
+import { Observable } from 'rxjs';
 
 @Controller('pin')
 export class PinController {
@@ -13,6 +14,11 @@ export class PinController {
     console.log(req.user)
     return this.pinService.create(createPinDto);
   }
+
+//   @Sse('sse')
+//   sse(): Observable<MessageEvent> {
+//   return { data: { hello: 'world' } };
+// }
 
   @Get()
   findAll() {
