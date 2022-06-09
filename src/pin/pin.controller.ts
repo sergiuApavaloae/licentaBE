@@ -24,6 +24,11 @@ export class PinController {
     return this.pinService.getInfos();
   }
 
+  @Get(':pinId')
+  getPin(@Param('id') id: string) {
+    return this.pinService.getPin(id);
+  }
+
   @Get(':id/username')
   findUser(@Param('id') id: string){
     return this.pinService.getUserName(id)
