@@ -28,6 +28,11 @@ export class PinController {
   findUser(@Param('id') id: string){
     return this.pinService.getUserName(id)
   }
+
+  @Get(':lat/:long')
+  findAlls(@Param('lat') lat: number,@Param('long') long: number) {
+    return this.pinService.findAlls(lat,long);
+  }
   // @Get(':id')
   // findOne(@Param('id') id: string) {
   //   return this.pinService.findOne(+id);

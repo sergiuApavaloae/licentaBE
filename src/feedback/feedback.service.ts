@@ -25,4 +25,9 @@ export class FeedbackService {
         await this.userRepository.save(user)
         return await this.feedbackRepository.save(feedback);
       }
+
+    async getInfos(){
+        let infos=[]
+        
+    }
 }

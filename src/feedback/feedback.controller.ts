@@ -13,6 +13,10 @@ export class FeedbackController {
     return this.feedbackService.create(feedback);
   }
   
+  @Get('infos')
+  getInfos(){
+    return this.feedbackService.getInfos()
+  }
   // @Get(':id/username')
   // findUser(@Param('id') id: string){
   //   return this.pinService.getUserName(id)
