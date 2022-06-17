@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Pin } from 'src/pin/entities/pin.entity';
+import { PinRepository } from 'src/pin/pin.repository';
 import { User } from 'src/user/user.entity';
 import { UserRepository } from 'src/user/user.repository';
 import { Feedback } from './entities/feedback.entity';
@@ -11,7 +13,9 @@ export class FeedbackService {
         @InjectRepository(Feedback)
         private feedbackRepository: FeedbackRepository,
         @InjectRepository(User)
-        private userRepository: UserRepository
+        private userRepository: UserRepository,
+        @InjectRepository(Pin)
+        private pinRepository: PinRepository
       ) {}
     async create(feedback: Feedback) {
         console.log('HERE FEe')
@@ -20,9 +24,18 @@ export class FeedbackService {
         })
         ;
         user.scor= user.scor+10
-
-        console.log(user)
         await this.userRepository.save(user)
+        const pin=await this.pinRepository.findOne({
+          where:{id:feedback.pinId
+          }
+        })
+        const userReport=await this.userRepository.findOne({
+          where:{id:pin.userId}
+      })
+
+        userReport.scor+=feedback.rating
+        console.log(userReport)
+        await this.userRepository.save(userReport)
         return await this.feedbackRepository.save(feedback);
       }
 

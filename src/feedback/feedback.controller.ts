@@ -10,6 +10,7 @@ export class FeedbackController {
   @Post()
   create(@Body() feedback:Feedback,@Request() req) {
     console.log(feedback)
+    console.log('EFEFE')
     return this.feedbackService.create(feedback);
   }
   
