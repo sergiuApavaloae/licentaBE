@@ -25,9 +25,9 @@ import { UserService } from './user.service';
        return infos
     }
 
-    @Get(':email')
-    async getOne(@Param('email') email: string) {
-      return await this.userService.findOne(email);
+    @Get(':id')
+    async getOne(@Param('id') id: string) {
+      return await this.userService.getInfoAboutUser(id);
     }
 
   

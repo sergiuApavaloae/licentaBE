@@ -32,6 +32,25 @@ export class UserService {
     await this.usersRepository.delete(id);
   }
 
+  async getInfoAboutUser(id:string):Promise<any>{
+    let info:any
+    console.log("BEEEE")
+    const user=await this.usersRepository.findOne({
+      where:{id:id}
+    })
+      let userInfo={name:"",scor:0,numberReports:0,numberFeedbacks:0}
+      userInfo.name=user.name
+      userInfo.scor=user.scor
+      const pins=await this.pinRepository.find({where:{userId:user.id}})
+      userInfo.numberReports=pins.length
+
+      const feedbacks=await this.feedbackRepository.find({where:{userId:user.id}})
+      userInfo.numberFeedbacks=feedbacks.length
+      info=userInfo
+   
+    return info
+  }
+
   async getInfos():Promise<any>{
     let infos=[]
     console.log("BEEEE")
