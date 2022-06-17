@@ -33,7 +33,7 @@ export class FeedbackService {
           where:{id:pin.userId}
       })
 
-        userReport.scor+=feedback.rating
+        userReport.scor= userReport.scor+feedback.rating
         console.log(userReport)
         await this.userRepository.save(userReport)
         return await this.feedbackRepository.save(feedback);
