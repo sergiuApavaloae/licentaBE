@@ -15,11 +15,12 @@ export class PinController {
     return this.pinService.create(createPinDto);
   }
 
-//   @Sse('sse')
-//   sse(): Observable<MessageEvent> {
-//   return { data: { hello: 'world' } };
-// }
+  @Get('test')
+  createTest() {
+    return this.pinService.createTest();
+  }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.pinService.findAll();
@@ -44,18 +45,9 @@ export class PinController {
   findAlls(@Param('lat') lat: number,@Param('long') long: number) {
     return this.pinService.findAlls(lat,long);
   }
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.pinService.findOne(+id);
-  // }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updatePinDto: UpdatePinDto) {
-  //   return this.pinService.update(+id, updatePinDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.pinService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.pinService.remove(id);
+  }
 }

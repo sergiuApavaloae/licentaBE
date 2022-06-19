@@ -20,7 +20,6 @@ import { UserService } from './user.service';
   
     @Get('infos')
     async getInfos() {
-       console.log('BEEEEE@@@')
        const infos=await this.userService.getInfos();
        return infos
     }

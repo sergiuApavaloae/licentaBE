@@ -46,7 +46,7 @@ export class PinService {
     const pins=await this.pinRepository.find();
     const availablePins=[]
     pins.forEach((pin)=>{
-      if(this.getDistanceFromLatLonInKm(lat,long,pin.latitude,pin.longitude)<5)
+      if(this.getDistanceFromLatLonInKm(lat,long,pin.latitude,pin.longitude)<55)
         availablePins.push(pin)
     })
     return availablePins
@@ -54,12 +54,7 @@ export class PinService {
 
   async getUserName(pinId:string):Promise<User>{
     console.log('BE')
-    // return await this.pinRepository.createQueryBuilder('pin')
-    // .select('user.name','userName')
-    // .innerJoin('user', 'user', 'pin.userId=user.user_id')
-    // .andWhere(`pin.user_id=${pinId}::character varying`)
-    // .printSql() 
-    // .getRawMany();
+  
     const pin=await this.pinRepository.findOne({
       where:{id:pinId}
     })
@@ -97,4 +92,38 @@ export class PinService {
   const pin=await this.pinRepository.findOne({where:{id:id}})
   return pin
   }
+ async getInfoAboutPin(pinId){
+    const pin=await this.pinRepository.findOne({where:{id:pinId}})
+    let info={name:'',description:'',rating:0,userName:'',average:0.0}
+    info.name=pin.name
+    info.description=pin.description
+    const feedbacks=await this.feedbackRepository.find({where:{pinId:pin.id}})
+    let numberOfFeedbacks=0
+    for(const feedback of feedbacks){
+      info.rating+=feedback.rating
+    }
+    info.average=info.rating/numberOfFeedbacks
+    const user=await this.userRepository.findOne({where:{id:pin.userId}})
+    info.userName=user.name
+
+  return info
+ }
+  async createTest(){
+    for(var i=1;i<=100;i++){
+      const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
+      const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
+      const pin=new Pin()
+      pin.latitude=latitude
+      pin.longitude=longitude
+      pin.description=''
+      console.log(pin)
+      await this.pinRepository.save(pin);
+    }
+    return []
+  }
+  async remove(id){
+    const pin=await this.pinRepository.findOne({where:{id:id}})
+    await this.pinRepository.remove(pin)
+    return true
+    }
 }

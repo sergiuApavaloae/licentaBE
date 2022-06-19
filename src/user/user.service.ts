@@ -34,7 +34,6 @@ export class UserService {
 
   async getInfoAboutUser(id:string):Promise<any>{
     let info:any
-    console.log("BEEEE")
     const user=await this.usersRepository.findOne({
       where:{id:id}
     })
@@ -53,7 +52,6 @@ export class UserService {
 
   async getInfos():Promise<any>{
     let infos=[]
-    console.log("BEEEE")
     const users=await this.usersRepository.find()
     for(const user of users){
       let userInfo={name:"",scor:0,numberReports:0,numberFeedbacks:0}
@@ -76,18 +74,11 @@ export class UserService {
   }
 
   async addUser(user: User) {
-    console.log(await bcrypt.hash('parola', 10))
-    console.log(await bcrypt.hash('parola', 10))
-
     user.password=await bcrypt.hash(user.password, 10);
     return await this.usersRepository.save(user);
   }
 
   async updateUser(user: User) {
-  //   const found: User = await this.usersRepository.findOne(user);
-  //   if (found) {
-  //     return await this.usersRepository.save(user);
-  //   } else return;
-  // }
+
 }
 }

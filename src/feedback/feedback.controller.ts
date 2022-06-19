@@ -9,8 +9,6 @@ export class FeedbackController {
   
   @Post()
   create(@Body() feedback:Feedback,@Request() req) {
-    console.log(feedback)
-    console.log('EFEFE')
     return this.feedbackService.create(feedback);
   }
   
@@ -18,8 +16,5 @@ export class FeedbackController {
   getInfos(){
     return this.feedbackService.getInfos()
   }
-  // @Get(':id/username')
-  // findUser(@Param('id') id: string){
-  //   return this.pinService.getUserName(id)
-  // }
+
 }
