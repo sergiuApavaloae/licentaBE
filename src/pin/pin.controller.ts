@@ -31,6 +31,11 @@ export class PinController {
     return this.pinService.getInfos();
   }
 
+  @Get('infos/:pinId')
+  getInfo(@Param('pinId') pinId:string) {
+    return this.pinService.getInfoAboutPin(pinId);
+  }
+
   @Get(':pinId')
   getPin(@Param('pinId') id: string) {
     return this.pinService.getPin(id);
