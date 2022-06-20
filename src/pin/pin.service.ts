@@ -94,17 +94,19 @@ export class PinService {
   }
  async getInfoAboutPin(pinId){
     const pin=await this.pinRepository.findOne({where:{id:pinId}})
-    let info={name:'',description:'',rating:0,userName:'',average:0.0}
+    let info={name:'',description:'',rating:0,userName:'',average:0.0,numberOfFeedbacks:0}
     info.name=pin.name
     info.description=pin.description
     const feedbacks=await this.feedbackRepository.find({where:{pinId:pin.id}})
     let numberOfFeedbacks=0
     for(const feedback of feedbacks){
       info.rating+=feedback.rating
+      numberOfFeedbacks+=1
     }
     info.average=info.rating/numberOfFeedbacks
     const user=await this.userRepository.findOne({where:{id:pin.userId}})
     info.userName=user.name
+    info.numberOfFeedbacks=numberOfFeedbacks
 
   return info
  }
