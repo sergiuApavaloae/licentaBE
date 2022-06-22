@@ -1,4 +1,5 @@
 import { Optional } from "@nestjs/common";
+import { IsNumber } from "class-validator";
 import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 import { ForeignKeyMetadata } from "typeorm/metadata/ForeignKeyMetadata";
 
@@ -7,20 +8,14 @@ export class Feedback extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column({nullable:true})
-    @Optional()
+    @Column()
     userId: string;
 
-    @Column({nullable:true})
-    @Optional()
+    @Column()
     pinId: string;
 
-    @Column({nullable:true})
-    @Optional()
-    text: string;
-
-    @Column({nullable:true})
-    @Optional()
+    @Column()
+    @IsNumber()
     rating: number;
 
 }

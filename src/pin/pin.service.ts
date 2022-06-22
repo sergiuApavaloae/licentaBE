@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { info } from 'console';
 import { Feedback } from 'src/feedback/entities/feedback.entity';
 import { FeedbackRepository } from 'src/feedback/feedback.repository';
 import { User } from 'src/user/user.entity';
@@ -25,8 +26,8 @@ export class PinService {
   }
 
   getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-    var R = 6371; // Radius of the earth in km
-    var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+    var R = 6371; 
+    var dLat = this.deg2rad(lat2-lat1);
     var dLon = this.deg2rad(lon2-lon1); 
     var a = 
       Math.sin(dLat/2) * Math.sin(dLat/2) +
@@ -34,7 +35,7 @@ export class PinService {
       Math.sin(dLon/2) * Math.sin(dLon/2)
       ; 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    var d = R * c; // Distance in km
+    var d = R * c;
     return d;
   }
   
@@ -53,7 +54,6 @@ export class PinService {
   }
 
   async getUserName(pinId:string):Promise<User>{
-    console.log('BE')
   
     const pin=await this.pinRepository.findOne({
       where:{id:pinId}
@@ -62,21 +62,23 @@ export class PinService {
     const user=await this.userRepository.findOne({
       where:{id:pin.userId}
     })
-    console.log(user.name)
     return user;
   }
   async getInfos(){
     let infos=[]
     const pins=await this.pinRepository.find()
     for(const pin of pins){
-      let info={name:'',description:'',rating:0,userName:''}
-      info.name=pin.name
-      info.description=pin.description
+      let info={id:'',average:0.0,rating:0,userName:'',latitude:'',longitude:''}
+      info.latitude=pin.latitude.slice(0,6)
+      info.longitude=pin.longitude.slice(0,6)
+      info.id=pin.id
       const feedbacks=await this.feedbackRepository.find({where:{pinId:pin.id}})
+      let numberOfFeedbacks=0
       for(const feedback of feedbacks){
         info.rating+=feedback.rating
+        numberOfFeedbacks+=1
       }
-
+      info.average=info.rating/numberOfFeedbacks
       const user=await this.userRepository.findOne({where:{id:pin.userId}})
       info.userName=user.name
       infos.push(info)
@@ -118,7 +120,6 @@ export class PinService {
       pin.latitude=latitude
       pin.longitude=longitude
       pin.description=''
-      console.log(pin)
       await this.pinRepository.save(pin);
     }
     return []

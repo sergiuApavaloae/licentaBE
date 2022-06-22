@@ -11,7 +11,6 @@ export class PinController {
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createPinDto,@Request() req) {
-    console.log(req.user)
     return this.pinService.create(createPinDto);
   }
 
