@@ -120,6 +120,48 @@ export class PinService {
       pin.latitude=latitude
       pin.longitude=longitude
       pin.description=''
+      pin.type='Streets'
+      await this.pinRepository.save(pin);
+    }
+    for(var i=1;i<=50;i++){
+      const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
+      const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
+      const pin=new Pin()
+      pin.latitude=latitude
+      pin.longitude=longitude
+      pin.description=''
+      pin.type='Parks'
+      await this.pinRepository.save(pin);
+    }
+
+    for(var i=1;i<=50;i++){
+      const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
+      const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
+      const pin=new Pin()
+      pin.latitude=latitude
+      pin.longitude=longitude
+      pin.description=''
+      pin.type='Animals'
+      await this.pinRepository.save(pin);
+    }
+    for(var i=1;i<=50;i++){
+      const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
+      const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
+      const pin=new Pin()
+      pin.latitude=latitude
+      pin.longitude=longitude
+      pin.description=''
+      pin.type='Other'
+      await this.pinRepository.save(pin);
+    }
+    for(var i=1;i<=50;i++){
+      const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
+      const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
+      const pin=new Pin()
+      pin.latitude=latitude
+      pin.longitude=longitude
+      pin.description=''
+      pin.type='Salubrity'
       await this.pinRepository.save(pin);
     }
     return []
