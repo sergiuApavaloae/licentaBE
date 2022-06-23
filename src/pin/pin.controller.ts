@@ -19,7 +19,7 @@ export class PinController {
     return this.pinService.createTest();
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.pinService.findAll();
