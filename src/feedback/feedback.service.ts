@@ -18,7 +18,6 @@ export class FeedbackService {
         private pinRepository: PinRepository
       ) {}
     async create(feedback: Feedback) {
-        console.log('HERE FEe')
         const user=await this.userRepository.findOne({
             where:{id:feedback.userId}
         })
@@ -34,7 +33,6 @@ export class FeedbackService {
       })
 
         userReport.scor+=+feedback.rating
-        console.log(userReport)
         await this.userRepository.save(userReport)
         return await this.feedbackRepository.save(feedback);
       }

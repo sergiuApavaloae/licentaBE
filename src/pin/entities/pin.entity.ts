@@ -12,10 +12,6 @@ export class Pin extends BaseEntity {
 
     @Column({nullable:true})
     @Optional()
-    name: string;
-
-    @Column({nullable:true})
-    @Optional()
     type: string;
 
     @Column({nullable:true})
