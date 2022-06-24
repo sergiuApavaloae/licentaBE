@@ -97,7 +97,6 @@ export class PinService {
  async getInfoAboutPin(pinId){
     const pin=await this.pinRepository.findOne({where:{id:pinId}})
     let info={name:'',description:'',rating:0,userName:'',average:0.0,numberOfFeedbacks:0}
-    info.name=pin.name
     info.description=pin.description
     const feedbacks=await this.feedbackRepository.find({where:{pinId:pin.id}})
     let numberOfFeedbacks=0
