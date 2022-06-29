@@ -41,7 +41,6 @@ import { UserService } from './user.service';
     }
     
     @Post()
-    @UseGuards(JwtAuthGuard)
     async addUser(@Body() user:User) {
       return await this.userService.addUser(user);
     }
