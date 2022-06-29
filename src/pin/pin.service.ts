@@ -116,6 +116,7 @@ export class PinService {
       const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
       const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
       const pin=new Pin()
+      pin.id='2';
       pin.latitude=latitude
       pin.longitude=longitude
       pin.description=''
@@ -126,6 +127,7 @@ export class PinService {
       const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
       const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
       const pin=new Pin()
+      pin.id='2';
       pin.latitude=latitude
       pin.longitude=longitude
       pin.description=''
@@ -137,6 +139,7 @@ export class PinService {
       const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
       const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
       const pin=new Pin()
+      pin.id='2';
       pin.latitude=latitude
       pin.longitude=longitude
       pin.description=''
@@ -147,6 +150,7 @@ export class PinService {
       const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
       const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
       const pin=new Pin()
+      pin.id='2';
       pin.latitude=latitude
       pin.longitude=longitude
       pin.description=''
@@ -157,6 +161,7 @@ export class PinService {
       const latitude=(Math.random() * (44.512 - 44.412) + 44.412).toFixed(5)
       const longitude=(Math.random() * (26.112 - 26.012) + 26.012).toFixed(5)
       const pin=new Pin()
+      pin.id='2';
       pin.latitude=latitude
       pin.longitude=longitude
       pin.description=''
