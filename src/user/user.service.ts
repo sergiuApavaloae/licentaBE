@@ -54,6 +54,7 @@ export class UserService {
     let infos=[]
     const users=await this.usersRepository.find()
     for(const user of users){
+      if(user.name!='admin'){
       let userInfo={name:"",scor:0,numberReports:0,numberFeedbacks:0}
       userInfo.name=user.name
       userInfo.scor=user.scor
@@ -66,8 +67,9 @@ export class UserService {
       infos.push(userInfo)
 
     }
-    infos.sort((a,b)=>{
-      return a.rating-b.rating
+  }
+    infos=infos.sort((a,b)=>{
+      return b.rating-a.rating
      })
      infos=infos.slice(0,10)
     return infos

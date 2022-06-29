@@ -34,7 +34,7 @@ export class PinService {
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
       Math.sin(dLon/2) * Math.sin(dLon/2)
       ; 
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var c = 2 * Math.asin(Math.sqrt(a)) 
     var d = R * c;
     return d;
   }
@@ -47,7 +47,7 @@ export class PinService {
     const pins=await this.pinRepository.find();
     const availablePins=[]
     pins.forEach((pin)=>{
-      if(this.getDistanceFromLatLonInKm(lat,long,pin.latitude,pin.longitude)<55)
+      if(this.getDistanceFromLatLonInKm(lat,long,pin.latitude,pin.longitude)<10)
         availablePins.push(pin)
     })
     return availablePins
@@ -84,8 +84,8 @@ export class PinService {
       infos.push(info)
     }
 
-    infos.sort((a,b)=>{
-      return a.rating-b.rating
+    infos=infos.sort((a,b)=>{
+      return b.rating-a.rating
      })
      infos=infos.slice(0,10)
     return infos
