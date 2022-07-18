@@ -80,6 +80,7 @@ export class PinService {
       }
       info.average=info.rating/numberOfFeedbacks
       const user=await this.userRepository.findOne({where:{id:pin.userId}})
+      if(user)
       info.userName=user.name
       infos.push(info)
     }
